@@ -1,0 +1,27 @@
+#resilience4j:
+#  circuitbreaker:
+#    configs:
+#      default:
+#        slidingWindowSize: 10 # 서킷브레이커가 닫힌 상태에서 기록할 슬라이딩 윈도우 요청 갯수
+#        failureRateThreshold: 5 # 실패율 임계값을 백분율로 구성. 임계치가 같거나 넘어버리면 차단처리함
+#        waitDurationInOpenState : 10s # 개방에서 반 개방으로 전환하기 전에 CircuitBreaker가 기다려야 하는 시간
+#    instances:
+#      pir-info: # 이름 지정
+#        baseConfig: default
+server:
+  port: 9091
+feign:
+  hystrix:
+    enabled: true #feign 을 통해 호출하는 모든 메소드들을 hystrix 으로 감싸서 호출
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 10000
+#      circuitBreaker:
+#        requestVolumeThreshold: 1 # default 20
+#        errorThresholdPercentage: 50 # default 50
+#      fallback:
+#        enabled: false # fallback 사용 정의
